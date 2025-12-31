@@ -1,1 +1,4 @@
-print("hello World")
+import pyjokes
+
+joke = pyjokes.get_joke()
+print(joke)
