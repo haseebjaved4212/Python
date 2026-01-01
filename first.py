@@ -1,4 +1,4 @@
-
+# Ans : 1
 # Text to Speech Conversion using pyttsx3
 
 # import pyttsx3
@@ -7,18 +7,19 @@
 # engine.say ("Hey I am Haseeb, I am learning Python.")
 # engine.runAndWait ()
 
-
+# Ans : 2 
 # List Files in a Directory using os module
 
-import os
+# import os
 
 # Specify the directory path
-directory_path = "/"
+# directory_path = "/"
 
 # List all files and folders in the directory
-contents = os.listdir(directory_path)
+# contents = os.listdir (directory_path)
 
 # Print each item
-print("Contents of the directory:")
-for item in contents:
-    print(item)
+# print ("Contents of the directory:")
+# for item in contents:
+#     print (item)
+
