@@ -500,4 +500,3 @@ if flags & 0b0100:  # Check if bit 2 is set
 
 ---
 
-Created as a comprehensive reference on Python operators. Suggest edits or ask for more examples!
