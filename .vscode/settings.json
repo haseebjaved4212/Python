@@ -4,6 +4,8 @@
     "Asyncio",
     "bytearray",
     "ints",
-    "pyttsx"
+    "nums",
+    "pyttsx",
+    "repr"
   ]
 }
