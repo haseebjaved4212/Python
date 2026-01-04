@@ -3,9 +3,13 @@
     "ababab",
     "Asyncio",
     "bytearray",
+    "endswith",
     "ints",
+    "lstrip",
     "nums",
     "pyttsx",
-    "repr"
+    "repr",
+    "rstrip",
+    "startswith"
   ]
 }
