@@ -22,7 +22,11 @@
 
 # 3. Write a python program to detect double spaces in a string.
 
-string = input("Enter a string: ")
-if "  " in string:  print("Double spaces detected.")
-else:   print("No double spaces detected.")
+# string = input("Enter a string: ")
+# if "  " in string:  print("Double spaces detected.")
+# else:   print("No double spaces detected.")
 
+
+# 5. Write a program to format the following letter using escape sequence characters.
+letter = "Dear Harry,\n\tThis Python course is nice.\nThanks!"
+print(letter)
