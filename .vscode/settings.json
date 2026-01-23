@@ -8,6 +8,7 @@
     "ints",
     "lstrip",
     "nums",
+    "Pytest",
     "pyttsx",
     "repr",
     "rstrip",

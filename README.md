@@ -1,6 +1,4 @@
-
-
-````mermaid
+```mermaid
   root((Backend Python))
     Python Language
       OOP
@@ -34,5 +32,8 @@
       Celery
       RabbitMQ/Redis
 
-      ```
-````
+Mind Map.png
+
+![Mind Map](Mind%20Map.png)
+
+```
