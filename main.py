@@ -6,6 +6,7 @@
 #     print(i)
 
 
-#  Table of 5 
-for i in range (5 , 51 , 5):
+n = int(input("Which table you wanna print : "))
+
+for i in range(n , n*10 + 1, n):
     print(i)
