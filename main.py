@@ -12,7 +12,7 @@ for i in range(n , n*10 + 1, n):
     print(i)
 
 """
-    Optimizing tool selection...# Code Logic Explanation
+Optimizing tool selection...# Code Logic Explanation
 
 Your code prints a **multiplication table** for a given number. Here's how it works:
 
