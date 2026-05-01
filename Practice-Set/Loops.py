@@ -26,3 +26,11 @@ for i in range(1, n + 1):
 # First of all, we need to understand what a palindrome is. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
 
+a = "Haseeb"
+b = ""
+for i in range(len(a)-1, -1, -1):
+    b = b + a[i]
+  
+if a == b:
+    print("The string is a palindrome.")    
+else:    print("The string is not a palindrome.")
