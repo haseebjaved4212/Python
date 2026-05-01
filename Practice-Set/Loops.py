@@ -19,4 +19,6 @@ for i in range(1, n + 1):
 
 a ="Haseeb"
 
-print (a[::-1]) # Using slicing to reverse the string
+for i in range(len(a)-1, -1, -1):
+    print(a[i], )
+
