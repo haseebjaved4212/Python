@@ -14,3 +14,9 @@ for i in range(1, n + 1):
     print(i)
 
 """
+
+# Q3: Reverse a String Without Using Built-in Functions
+
+a ="Haseeb"
+
+print (a[::-1]) # Using slicing to reverse the string
