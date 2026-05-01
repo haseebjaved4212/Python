@@ -17,8 +17,8 @@ for i in range(1, n + 1):
 
 # Q3: Reverse a String Without Using Built-in Functions
 
-a ="Haseeb"
+a = input("Enter a string: ")
 
 for i in range(len(a)-1, -1, -1):
-    print(a[i], )
+    print(a[i], end="")
 
