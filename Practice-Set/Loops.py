@@ -26,11 +26,27 @@ for i in range(1, n + 1):
 # First of all, we need to understand what a palindrome is. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
 
 
-a = "Haseeb"
-b = ""
-for i in range(len(a)-1, -1, -1):
-    b = b + a[i]
+# a = "Haseeb"
+# b = ""
+# for i in range(len(a)-1, -1, -1):
+#     b = b + a[i]
   
-if a == b:
-    print("The string is a palindrome.")    
-else:    print("The string is not a palindrome.")
+# if a == b:
+#     print("The string is a palindrome.")    
+# else:    print("The string is not a palindrome.")
+
+
+# Q5 : Count all the digits, letters and special characters in a string?
+
+a = input("Enter a string with special characters, digits and letters: ")
+digits = 0    
+letters = 0
+special_characters = 0
+for i in a:
+    if i.isdigit():
+        digits += 1
+    elif i.isalpha():
+        letters += 1
+    else: 
+        special_characters += 1
+print(f"Digits: {digits}\nSpecial Characters: {special_characters}\nLetters: {letters}")
