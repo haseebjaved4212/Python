@@ -38,15 +38,41 @@ for i in range(1, n + 1):
 
 # Q5 : Count all the digits, letters and special characters in a string?
 
-a = input("Enter a string with special characters, digits and letters: ")
-digits = 0    
-letters = 0
-special_characters = 0
-for i in a:
-    if i.isdigit():
-        digits += 1
-    elif i.isalpha():
-        letters += 1
-    else: 
-        special_characters += 1
-print(f"Digits: {digits}\nSpecial Characters: {special_characters}\nLetters: {letters}")
+# a = input("Enter a string with special characters, digits and letters: ")
+# digits = 0    
+# letters = 0
+# special_characters = 0
+# for i in a:
+#     if i.isdigit():
+#         digits += 1
+#     elif i.isalpha():
+#         letters += 1
+#     else: 
+#         special_characters += 1
+# print(f"Digits: {digits}\nSpecial Characters: {special_characters}\nLetters: {letters}")
+
+
+# While Loop
+
+# Q1: separate each digit of a number and print them in a new line?
+# n = int(input("Enter an integer: "))
+# rev = 0
+# while n > 0:
+#     digit = n % 10
+#     rev = rev * 10 + digit
+#     n = n // 10
+# print(rev)
+
+#  Q2: Check if the given number is palindrome or not?
+
+n = int(input("Enter an integer: "))
+rev = 0
+temp = n
+while n > 0:
+    digit = n % 10
+    rev = rev * 10 + digit
+    n = n // 10
+if temp == rev:
+    print("The number is a palindrome.")
+else:
+    print("The number is not a palindrome.")
