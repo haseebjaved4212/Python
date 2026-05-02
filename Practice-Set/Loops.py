@@ -65,14 +65,15 @@ for i in range(1, n + 1):
 
 #  Q2: Check if the given number is palindrome or not?
 
-n = int(input("Enter an integer: "))
-rev = 0
-temp = n
-while n > 0:
-    digit = n % 10
-    rev = rev * 10 + digit
-    n = n // 10
-if temp == rev:
-    print("The number is a palindrome.")
-else:
-    print("The number is not a palindrome.")
+# n = int(input("Enter an integer: "))
+# rev = 0
+# temp = n
+# while n > 0:
+#     digit = n % 10
+#     rev = rev * 10 + digit
+#     n = n // 10
+# if temp == rev:
+#     print("The number is a palindrome.")
+# else:
+#     print("The number is not a palindrome.")
+
