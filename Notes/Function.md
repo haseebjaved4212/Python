@@ -1,415 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Functions — Complete Reference</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0d0d0d;
-    --surface: #141414;
-    --surface2: #1c1c1c;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --accent: #b3ff5c;
-    --accent2: #5cf4ff;
-    --accent3: #ff6b6b;
-    --text: #f0f0f0;
-    --muted: #888;
-    --muted2: #555;
-    --code-bg: #111;
-    --keyword: #ff79c6;
-    --func: #b3ff5c;
-    --string: #f1fa8c;
-    --comment: #6272a4;
-    --builtin: #8be9fd;
-    --num: #bd93f9;
-  }
+# 🐍 Python Functions — Complete Reference
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+> Everything you need to know about defining, calling, and mastering functions in Python — from basics to advanced patterns.
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-  }
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python&logoColor=white)
+![Level](https://img.shields.io/badge/Level-Beginner%20to%20Advanced-green?style=flat-square)
+![Topics](https://img.shields.io/badge/Topics-10-orange?style=flat-square)
+![Examples](https://img.shields.io/badge/Code%20Examples-30+-purple?style=flat-square)
 
-  /* HEADER */
-  header {
-    padding: 80px 0 60px;
-    border-bottom: 1px solid var(--border2);
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -80px; left: -80px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(179,255,92,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  header::after {
-    content: 'def';
-    position: absolute;
-    right: 60px; bottom: -30px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 160px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.02);
-    letter-spacing: -4px;
-    pointer-events: none;
-  }
-  .container { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+---
 
-  .tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    background: rgba(179,255,92,0.08);
-    border: 1px solid rgba(179,255,92,0.2);
-    padding: 4px 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    letter-spacing: 0.1em;
-  }
+## 📚 Table of Contents
 
-  h1 {
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    margin-bottom: 16px;
-  }
-  h1 span { color: var(--accent); }
+1. [What is a Function?](#1-what-is-a-function)
+2. [Anatomy of a Function](#2-anatomy-of-a-function)
+3. [Parameters & Arguments](#3-parameters--arguments)
+4. [Return Values](#4-return-values)
+5. [Scope & Namespaces](#5-scope--namespaces)
+6. [Lambda Functions](#6-lambda-functions)
+7. [Decorators](#7-decorators)
+8. [Generator Functions](#8-generator-functions)
+9. [Advanced Patterns](#9-advanced-patterns)
+10. [Best Practices](#10-best-practices)
 
-  .subtitle {
-    font-size: 16px;
-    color: var(--muted);
-    max-width: 500px;
-    font-weight: 400;
-  }
+---
 
-  .meta-row {
-    display: flex;
-    gap: 24px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-  }
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .meta-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
+## 1. What is a Function?
 
-  /* TOC */
-  .toc {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    padding: 28px 32px;
-    margin: 48px 0;
-  }
-  .toc-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .toc ol {
-    padding-left: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 32px;
-  }
-  .toc li { font-size: 14px; }
-  .toc a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .toc a:hover { color: var(--accent); }
+A function is a **reusable, named block of code** that performs a specific task. You define it once and call it as many times as you need. Functions are the backbone of writing clean, maintainable Python.
 
-  /* SECTIONS */
-  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-  section:last-of-type { border-bottom: none; }
+They help you:
+- Avoid repetition (the **DRY** principle — Don't Repeat Yourself)
+- Break big problems into small, manageable pieces
+- Make code easier to read, test, and debug
 
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted2);
-    letter-spacing: 0.1em;
-    margin-bottom: 6px;
-  }
+```python
+# Without a function — repetitive and hard to maintain
+print("Hello, Alice!")
+print("Hello, Bob!")
+print("Hello, Charlie!")
 
-  h2 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 20px;
-    color: var(--text);
-  }
-  h2 .hl { color: var(--accent); }
+# With a function — clean, reusable, easy to change
+def greet(name):
+    print(f"Hello, {name}!")
 
-  h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-    margin: 28px 0 10px;
-    letter-spacing: -0.2px;
-  }
+greet("Alice")
+greet("Bob")
+greet("Charlie")
+```
 
-  p { color: rgba(240,240,240,0.8); margin-bottom: 16px; font-size: 15px; }
+---
 
-  /* CODE BLOCKS */
-  .code-wrap {
-    background: var(--code-bg);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 20px 0;
-  }
-  .code-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid var(--border);
-  }
-  .code-lang {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted2);
-    letter-spacing: 0.08em;
-  }
-  .code-dots { display: flex; gap: 6px; }
-  .code-dots span {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--border2);
-  }
-  pre {
-    padding: 20px 24px;
-    overflow-x: auto;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    line-height: 1.8;
-  }
+## 2. Anatomy of a Function
 
-  /* syntax highlighting via spans */
-  .kw { color: var(--keyword); }
-  .fn { color: var(--func); }
-  .st { color: var(--string); }
-  .cm { color: var(--comment); font-style: italic; }
-  .bi { color: var(--builtin); }
-  .nm { color: var(--num); }
-  .px { color: var(--accent2); }
+Every function in Python follows this structure. Understanding each part before going deeper is key.
 
-  /* CALLOUT BOXES */
-  .callout {
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 20px 0;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    font-size: 14px;
-  }
-  .callout-icon {
-    font-size: 16px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .callout-text { line-height: 1.6; }
-  .callout.tip {
-    background: rgba(179,255,92,0.06);
-    border: 1px solid rgba(179,255,92,0.15);
-    color: rgba(179,255,92,0.9);
-  }
-  .callout.warn {
-    background: rgba(255,107,107,0.06);
-    border: 1px solid rgba(255,107,107,0.15);
-    color: rgba(255,150,150,0.9);
-  }
-  .callout.info {
-    background: rgba(92,244,255,0.06);
-    border: 1px solid rgba(92,244,255,0.15);
-    color: rgba(92,244,255,0.9);
-  }
-
-  /* INLINE CODE */
-  code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border2);
-    padding: 2px 7px;
-    border-radius: 4px;
-    color: var(--accent2);
-  }
-
-  /* TABLE */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 14px;
-  }
-  .data-table th {
-    background: rgba(255,255,255,0.04);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border2);
-    font-weight: 500;
-  }
-  .data-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    color: rgba(240,240,240,0.75);
-    vertical-align: top;
-  }
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  /* ANATOMY DIAGRAM */
-  .anatomy {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    padding: 28px;
-    margin: 20px 0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    line-height: 2.2;
-  }
-  .anatomy .arrow-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .anatomy .highlight-box {
-    display: inline-block;
-    border-bottom: 2px solid;
-    position: relative;
-  }
-
-  /* BADGE */
-  .badge {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  .badge-green { background: rgba(179,255,92,0.12); color: var(--accent); border: 1px solid rgba(179,255,92,0.2); }
-  .badge-blue { background: rgba(92,244,255,0.1); color: var(--accent2); border: 1px solid rgba(92,244,255,0.2); }
-  .badge-red { background: rgba(255,107,107,0.1); color: var(--accent3); border: 1px solid rgba(255,107,107,0.2); }
-
-  /* FOOTER */
-  footer {
-    padding: 40px;
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted2);
-    border-top: 1px solid var(--border);
-  }
-  footer span { color: var(--accent); }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="container">
-    <div class="tag">📄 README.md</div>
-    <h1>Python <span>Functions</span><br>Complete Reference</h1>
-    <p class="subtitle">Everything you need to know about defining, calling, and mastering functions in Python — from basics to advanced patterns.</p>
-    <div class="meta-row">
-      <div class="meta-item"><span class="meta-dot"></span> Python 3.10+</div>
-      <div class="meta-item"><span class="meta-dot"></span> Beginner to Advanced</div>
-      <div class="meta-item"><span class="meta-dot"></span> 10 Topics Covered</div>
-      <div class="meta-item"><span class="meta-dot"></span> 30+ Code Examples</div>
-    </div>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- TABLE OF CONTENTS -->
-  <div class="toc">
-    <div class="toc-title">// Table of Contents</div>
-    <ol>
-      <li><a href="#basics">What is a Function?</a></li>
-      <li><a href="#anatomy">Anatomy of a Function</a></li>
-      <li><a href="#params">Parameters &amp; Arguments</a></li>
-      <li><a href="#return">Return Values</a></li>
-      <li><a href="#scope">Scope &amp; Namespaces</a></li>
-      <li><a href="#lambda">Lambda Functions</a></li>
-      <li><a href="#decorators">Decorators</a></li>
-      <li><a href="#generators">Generators</a></li>
-      <li><a href="#advanced">Advanced Patterns</a></li>
-      <li><a href="#best">Best Practices</a></li>
-    </ol>
-  </div>
-
-  <!-- 1. BASICS -->
-  <section id="basics">
-    <div class="section-num">01 —</div>
-    <h2>What is a <span class="hl">Function?</span></h2>
-    <p>A function is a reusable, named block of code that performs a specific task. You define it once, call it as many times as you need. Functions are the backbone of writing clean, maintainable Python.</p>
-    <p>They help you avoid repetition (the DRY principle — Don't Repeat Yourself), make code easier to test, and break big problems into small, manageable pieces.</p>
-
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="code-dots"><span></span><span></span><span></span></div>
-        <div class="code-lang">python</div>
-      </div>
-      <pre><span class="cm"># Without a function — repetitive and hard to maintain</span>
-<span class="bi">print</span>(<span class="st">"Hello, Alice!"</span>)
-<span class="bi">print</span>(<span class="st">"Hello, Bob!"</span>)
-<span class="bi">print</span>(<span class="st">"Hello, Charlie!"</span>)
-
-<span class="cm"># With a function — clean, reusable, easy to change</span>
-<span class="kw">def</span> <span class="fn">greet</span>(name):
-    <span class="bi">print</span>(<span class="st">f"Hello, </span><span class="px">{name}</span><span class="st">!"</span>)
-
-greet(<span class="st">"Alice"</span>)
-greet(<span class="st">"Bob"</span>)
-greet(<span class="st">"Charlie"</span>)</pre>
-    </div>
-  </section>
-
-  <!-- 2. ANATOMY -->
-  <section id="anatomy">
-    <div class="section-num">02 —</div>
-    <h2>Anatomy of a <span class="hl">Function</span></h2>
-    <p>Every function in Python follows this structure. Understanding each part is key before going deeper.</p>
-
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="code-dots"><span></span><span></span><span></span></div>
-        <div class="code-lang">python — full anatomy</div>
-      </div>
-      <pre><span class="kw">def</span> <span class="fn">add_numbers</span>(a: <span class="bi">int</span>, b: <span class="bi">int</span>) -> <span class="bi">int</span>:
-    <span class="st">"""
+```python
+def add_numbers(a: int, b: int) -> int:
+    """
     Adds two integers and returns the result.
 
     Args:
@@ -418,501 +65,502 @@ greet(<span class="st">"Charlie"</span>)</pre>
 
     Returns:
         int: Sum of a and b.
-    """</span>
+    """
     result = a + b
-    <span class="kw">return</span> result
+    return result
 
-<span class="cm"># Calling the function</span>
-total = add_numbers(<span class="nm">10</span>, <span class="nm">20</span>)
-<span class="bi">print</span>(total)  <span class="cm"># 30</span></pre>
-    </div>
+# Calling the function
+total = add_numbers(10, 20)
+print(total)  # 30
+```
 
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Part</th>
-          <th>Syntax</th>
-          <th>Purpose</th>
-          <th>Required?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Keyword</td>
-          <td><code>def</code></td>
-          <td>Declares a function definition</td>
-          <td><span class="badge badge-red">Required</span></td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td><code>add_numbers</code></td>
-          <td>Identifier used to call the function</td>
-          <td><span class="badge badge-red">Required</span></td>
-        </tr>
-        <tr>
-          <td>Parameters</td>
-          <td><code>(a, b)</code></td>
-          <td>Inputs the function accepts</td>
-          <td><span class="badge badge-blue">Optional</span></td>
-        </tr>
-        <tr>
-          <td>Type hints</td>
-          <td><code>a: int</code></td>
-          <td>Documents expected types (no enforcement)</td>
-          <td><span class="badge badge-blue">Optional</span></td>
-        </tr>
-        <tr>
-          <td>Return hint</td>
-          <td><code>-> int</code></td>
-          <td>Documents what type is returned</td>
-          <td><span class="badge badge-blue">Optional</span></td>
-        </tr>
-        <tr>
-          <td>Docstring</td>
-          <td><code>"""..."""</code></td>
-          <td>Human-readable description</td>
-          <td><span class="badge badge-blue">Optional</span></td>
-        </tr>
-        <tr>
-          <td>Body</td>
-          <td>indented block</td>
-          <td>The actual code that runs</td>
-          <td><span class="badge badge-red">Required</span></td>
-        </tr>
-        <tr>
-          <td>Return</td>
-          <td><code>return result</code></td>
-          <td>Sends a value back to the caller</td>
-          <td><span class="badge badge-blue">Optional</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+| Part | Syntax | Purpose | Required? |
+|------|--------|---------|-----------|
+| Keyword | `def` | Declares a function definition | ✅ Yes |
+| Name | `add_numbers` | Identifier used to call the function | ✅ Yes |
+| Parameters | `(a, b)` | Inputs the function accepts | ❌ Optional |
+| Type hints | `a: int` | Documents expected types (no enforcement) | ❌ Optional |
+| Return hint | `-> int` | Documents what type is returned | ❌ Optional |
+| Docstring | `"""..."""` | Human-readable description | ❌ Optional |
+| Body | indented block | The actual code that runs | ✅ Yes |
+| Return | `return result` | Sends a value back to the caller | ❌ Optional |
 
-  <!-- 3. PARAMETERS -->
-  <section id="params">
-    <div class="section-num">03 —</div>
-    <h2>Parameters <span class="hl">&amp; Arguments</span></h2>
-    <p>Python gives you a lot of flexibility in how you pass data into functions. There are five distinct ways.</p>
+---
 
-    <h3>Positional Parameters</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">describe</span>(name, age):
-    <span class="bi">print</span>(<span class="st">f"</span><span class="px">{name}</span><span class="st"> is </span><span class="px">{age}</span><span class="st"> years old"</span>)
+## 3. Parameters & Arguments
 
-describe(<span class="st">"Haseeb"</span>, <span class="nm">25</span>)   <span class="cm"># order matters here</span></pre>
-    </div>
+Python gives you a lot of flexibility in how you pass data into functions. There are five distinct ways.
 
-    <h3>Default Parameter Values</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">power</span>(base, exponent=<span class="nm">2</span>):   <span class="cm"># exponent defaults to 2</span>
-    <span class="kw">return</span> base ** exponent
+### 3.1 Positional Parameters
 
-<span class="bi">print</span>(power(<span class="nm">3</span>))       <span class="cm"># 9  — uses default</span>
-<span class="bi">print</span>(power(<span class="nm">3</span>, <span class="nm">3</span>))    <span class="cm"># 27 — overrides default</span></pre>
-    </div>
+```python
+def describe(name, age):
+    print(f"{name} is {age} years old")
 
-    <div class="callout warn">
-      <div class="callout-icon">⚠</div>
-      <div class="callout-text"><strong>Common gotcha:</strong> Never use mutable objects (lists, dicts) as default parameter values. They are created once at function definition time, not each call. Use <code>None</code> and initialize inside the body instead.</div>
-    </div>
+describe("Haseeb", 25)   # order matters here
+```
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python — mutable default bug vs fix</div></div>
-      <pre><span class="cm"># BAD — shared across all calls!</span>
-<span class="kw">def</span> <span class="fn">add_item_bad</span>(item, items=[]):
+### 3.2 Default Parameter Values
+
+```python
+def power(base, exponent=2):   # exponent defaults to 2
+    return base ** exponent
+
+print(power(3))      # 9  — uses default
+print(power(3, 3))   # 27 — overrides default
+```
+
+> [!WARNING]
+> **Common gotcha:** Never use mutable objects (lists, dicts) as default parameter values. They are created once at function definition time, not each call. Use `None` and initialize inside the body instead.
+
+```python
+# BAD — the list is shared across all calls!
+def add_item_bad(item, items=[]):
     items.append(item)
-    <span class="kw">return</span> items
+    return items
 
-<span class="cm"># GOOD — fresh list each call</span>
-<span class="kw">def</span> <span class="fn">add_item_good</span>(item, items=<span class="kw">None</span>):
-    <span class="kw">if</span> items <span class="kw">is</span> <span class="kw">None</span>:
+print(add_item_bad("a"))   # ['a']
+print(add_item_bad("b"))   # ['a', 'b']  <-- unexpected!
+
+# GOOD — fresh list every call
+def add_item_good(item, items=None):
+    if items is None:
         items = []
     items.append(item)
-    <span class="kw">return</span> items</pre>
-    </div>
+    return items
+```
 
-    <h3>Keyword Arguments</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">connect</span>(host, port, timeout):
-    <span class="bi">print</span>(<span class="st">f"Connecting to </span><span class="px">{host}</span><span class="st">:</span><span class="px">{port}</span><span class="st"> (timeout=</span><span class="px">{timeout}</span><span class="st">s)"</span>)
+### 3.3 Keyword Arguments
 
-<span class="cm"># Named — order doesn't matter</span>
-connect(timeout=<span class="nm">30</span>, host=<span class="st">"localhost"</span>, port=<span class="nm">5432</span>)</pre>
-    </div>
+```python
+def connect(host, port, timeout):
+    print(f"Connecting to {host}:{port} (timeout={timeout}s)")
 
-    <h3>*args — Variable Positional Arguments</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">total</span>(*numbers):   <span class="cm"># numbers is a tuple</span>
-    <span class="kw">return</span> <span class="bi">sum</span>(numbers)
+# Named — order doesn't matter
+connect(timeout=30, host="localhost", port=5432)
+```
 
-<span class="bi">print</span>(total(<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>))           <span class="cm"># 6</span>
-<span class="bi">print</span>(total(<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>, <span class="nm">40</span>))    <span class="cm"># 100</span></pre>
-    </div>
+### 3.4 `*args` — Variable Positional Arguments
 
-    <h3>**kwargs — Variable Keyword Arguments</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">build_profile</span>(**info):   <span class="cm"># info is a dict</span>
-    <span class="kw">for</span> key, value <span class="kw">in</span> info.items():
-        <span class="bi">print</span>(<span class="st">f"  </span><span class="px">{key}</span><span class="st">: </span><span class="px">{value}</span><span class="st">"</span>)
+Collects any number of positional arguments into a **tuple**.
 
-build_profile(name=<span class="st">"Haseeb"</span>, role=<span class="st">"dev"</span>, lang=<span class="st">"Python"</span>)</pre>
-    </div>
+```python
+def total(*numbers):   # numbers is a tuple
+    return sum(numbers)
 
-    <div class="callout tip">
-      <div class="callout-icon">✦</div>
-      <div class="callout-text">The correct order when combining all parameter types: <code>def func(positional, /, normal, *args, keyword_only, **kwargs)</code>. Python enforces this order strictly.</div>
-    </div>
-  </section>
+print(total(1, 2, 3))           # 6
+print(total(10, 20, 30, 40))    # 100
+```
 
-  <!-- 4. RETURN -->
-  <section id="return">
-    <div class="section-num">04 —</div>
-    <h2>Return <span class="hl">Values</span></h2>
-    <p>Functions can return any Python object. If no <code>return</code> statement is present (or just <code>return</code> alone), Python returns <code>None</code>.</p>
+### 3.5 `**kwargs` — Variable Keyword Arguments
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="cm"># Return a single value</span>
-<span class="kw">def</span> <span class="fn">square</span>(n):
-    <span class="kw">return</span> n ** <span class="nm">2</span>
+Collects any number of keyword arguments into a **dict**.
 
-<span class="cm"># Return multiple values (actually a tuple)</span>
-<span class="kw">def</span> <span class="fn">min_max</span>(numbers):
-    <span class="kw">return</span> <span class="bi">min</span>(numbers), <span class="bi">max</span>(numbers)
+```python
+def build_profile(**info):   # info is a dict
+    for key, value in info.items():
+        print(f"  {key}: {value}")
 
-low, high = min_max([<span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">9</span>, <span class="nm">4</span>, <span class="nm">7</span>])
-<span class="bi">print</span>(low, high)   <span class="cm"># 1 9</span>
+build_profile(name="Haseeb", role="dev", lang="Python")
+```
 
-<span class="cm"># Early return — guard clause pattern</span>
-<span class="kw">def</span> <span class="fn">divide</span>(a, b):
-    <span class="kw">if</span> b == <span class="nm">0</span>:
-        <span class="kw">return</span> <span class="kw">None</span>   <span class="cm"># early exit</span>
-    <span class="kw">return</span> a / b</pre>
-    </div>
-  </section>
+### 3.6 Combining All Parameter Types
 
-  <!-- 5. SCOPE -->
-  <section id="scope">
-    <div class="section-num">05 —</div>
-    <h2>Scope <span class="hl">&amp; Namespaces</span></h2>
-    <p>Python uses the LEGB rule to resolve variable names: <strong>L</strong>ocal → <strong>E</strong>nclosing → <strong>G</strong>lobal → <strong>B</strong>uilt-in.</p>
+The correct order when mixing all types:
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre>x = <span class="st">"global"</span>
+```python
+def func(positional_only, /, normal, *args, keyword_only, **kwargs):
+    pass
+```
 
-<span class="kw">def</span> <span class="fn">outer</span>():
-    x = <span class="st">"enclosing"</span>
+> [!TIP]
+> Python enforces this order strictly. Positional-only params go before `/`, keyword-only params go after `*args`.
 
-    <span class="kw">def</span> <span class="fn">inner</span>():
-        x = <span class="st">"local"</span>
-        <span class="bi">print</span>(x)   <span class="cm"># local</span>
+---
+
+## 4. Return Values
+
+Functions can return any Python object. If no `return` statement is present (or just `return` alone), Python implicitly returns `None`.
+
+```python
+# Return a single value
+def square(n):
+    return n ** 2
+
+# Return multiple values (Python packs them into a tuple)
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+low, high = min_max([3, 1, 9, 4, 7])
+print(low, high)   # 1 9
+
+# Early return — guard clause pattern
+def divide(a, b):
+    if b == 0:
+        return None   # exit early, skip the rest
+    return a / b
+```
+
+---
+
+## 5. Scope & Namespaces
+
+Python resolves variable names using the **LEGB** rule:
+
+```
+Local → Enclosing → Global → Built-in
+```
+
+```python
+x = "global"
+
+def outer():
+    x = "enclosing"
+
+    def inner():
+        x = "local"
+        print(x)   # local
 
     inner()
-    <span class="bi">print</span>(x)       <span class="cm"># enclosing</span>
+    print(x)       # enclosing
 
 outer()
-<span class="bi">print</span>(x)           <span class="cm"># global</span>
+print(x)           # global
+```
 
-<span class="cm"># Modifying a global inside a function</span>
-counter = <span class="nm">0</span>
+### Modifying Variables from Outer Scopes
 
-<span class="kw">def</span> <span class="fn">increment</span>():
-    <span class="kw">global</span> counter
-    counter += <span class="nm">1</span>
+```python
+# Modify a global variable inside a function
+counter = 0
 
-<span class="cm"># Modifying enclosing scope from nested function</span>
-<span class="kw">def</span> <span class="fn">make_counter</span>():
-    count = <span class="nm">0</span>
-    <span class="kw">def</span> <span class="fn">tick</span>():
-        <span class="kw">nonlocal</span> count
-        count += <span class="nm">1</span>
-        <span class="kw">return</span> count
-    <span class="kw">return</span> tick</pre>
-    </div>
+def increment():
+    global counter
+    counter += 1
 
-    <div class="callout info">
-      <div class="callout-icon">ℹ</div>
-      <div class="callout-text">Avoid <code>global</code> as much as possible. It makes functions harder to test and reason about. Pass values as parameters and return results instead.</div>
-    </div>
-  </section>
+# Modify an enclosing variable from a nested function
+def make_counter():
+    count = 0
 
-  <!-- 6. LAMBDA -->
-  <section id="lambda">
-    <div class="section-num">06 —</div>
-    <h2>Lambda <span class="hl">Functions</span></h2>
-    <p>A lambda is a small, anonymous function defined in a single line. It is limited to a single expression — no statements, no multiple lines. Best used as a short throwaway function passed to another function.</p>
+    def tick():
+        nonlocal count
+        count += 1
+        return count
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="cm"># Syntax: lambda params: expression</span>
-double = <span class="kw">lambda</span> x: x * <span class="nm">2</span>
-add    = <span class="kw">lambda</span> a, b: a + b
+    return tick
 
-<span class="cm"># Common use: sorting with a custom key</span>
-students = [(<span class="st">"Alice"</span>, <span class="nm">88</span>), (<span class="st">"Bob"</span>, <span class="nm">95</span>), (<span class="st">"Carol"</span>, <span class="nm">72</span>)]
+counter_fn = make_counter()
+print(counter_fn())   # 1
+print(counter_fn())   # 2
+```
 
-students.sort(<span class="px">key</span>=<span class="kw">lambda</span> s: s[<span class="nm">1</span>], <span class="px">reverse</span>=<span class="kw">True</span>)
-<span class="bi">print</span>(students)   <span class="cm"># [('Bob', 95), ('Alice', 88), ('Carol', 72)]</span>
+> [!WARNING]
+> Avoid `global` as much as possible. It makes functions hard to test and reason about. Pass values as parameters and return results instead.
 
-<span class="cm"># With map() and filter()</span>
-nums = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
-squares = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> x: x**<span class="nm">2</span>, nums))
-evens   = <span class="bi">list</span>(<span class="bi">filter</span>(<span class="kw">lambda</span> x: x % <span class="nm">2</span> == <span class="nm">0</span>, nums))</pre>
-    </div>
+---
 
-    <div class="callout warn">
-      <div class="callout-icon">⚠</div>
-      <div class="callout-text">If your lambda is getting complex or you need to reuse it, write a proper <code>def</code> function instead. Lambdas are for quick, single-use cases only.</div>
-    </div>
-  </section>
+## 6. Lambda Functions
 
-  <!-- 7. DECORATORS -->
-  <section id="decorators">
-    <div class="section-num">07 —</div>
-    <h2>Decorators</h2>
-    <p>A decorator is a function that wraps another function to extend or modify its behavior — without changing the original function's source code. This is one of the most powerful patterns in Python.</p>
+A lambda is a small, **anonymous** function defined in a single expression. It cannot contain statements or multiple lines. Best used as a short throwaway passed to another function.
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python — building a decorator from scratch</div></div>
-      <pre><span class="kw">import</span> functools
-<span class="kw">import</span> time
+```python
+# Syntax: lambda params: expression
+double = lambda x: x * 2
+add    = lambda a, b: a + b
 
-<span class="kw">def</span> <span class="fn">timer</span>(func):
-    <span class="st">"""Decorator that prints how long a function takes."""</span>
-    @functools.wraps(func)   <span class="cm"># preserves original func metadata</span>
-    <span class="kw">def</span> <span class="fn">wrapper</span>(*args, **kwargs):
+# Common use: sorting with a custom key
+students = [("Alice", 88), ("Bob", 95), ("Carol", 72)]
+students.sort(key=lambda s: s[1], reverse=True)
+print(students)   # [('Bob', 95), ('Alice', 88), ('Carol', 72)]
+
+# With map() and filter()
+nums = [1, 2, 3, 4, 5]
+squares = list(map(lambda x: x**2, nums))      # [1, 4, 9, 16, 25]
+evens   = list(filter(lambda x: x % 2 == 0, nums))  # [2, 4]
+```
+
+> [!WARNING]
+> If your lambda is getting complex or you need to reuse it — write a proper `def` function. Lambdas are for quick, single-use cases only.
+
+---
+
+## 7. Decorators
+
+A decorator is a function that **wraps another function** to extend or modify its behavior, without changing the original source code. One of the most powerful patterns in Python.
+
+### Building a Decorator from Scratch
+
+```python
+import functools
+import time
+
+def timer(func):
+    """Decorator that prints how long a function takes."""
+    @functools.wraps(func)   # preserves original func metadata
+    def wrapper(*args, **kwargs):
         start = time.perf_counter()
         result = func(*args, **kwargs)
         end = time.perf_counter()
-        <span class="bi">print</span>(<span class="st">f"</span><span class="px">{func.__name__}</span><span class="st"> ran in </span><span class="px">{end - start:.4f}</span><span class="st">s"</span>)
-        <span class="kw">return</span> result
-    <span class="kw">return</span> wrapper
+        print(f"{func.__name__} ran in {end - start:.4f}s")
+        return result
+    return wrapper
 
 @timer
-<span class="kw">def</span> <span class="fn">slow_task</span>():
-    time.sleep(<span class="nm">0.5</span>)
-    <span class="bi">print</span>(<span class="st">"Task done"</span>)
+def slow_task():
+    time.sleep(0.5)
+    print("Task done")
 
 slow_task()
-<span class="cm"># Task done</span>
-<span class="cm"># slow_task ran in 0.5002s</span></pre>
-    </div>
+# Task done
+# slow_task ran in 0.5002s
+```
 
-    <h3>Decorator with Arguments</h3>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">repeat</span>(times):
-    <span class="kw">def</span> <span class="fn">decorator</span>(func):
+### Decorator with Arguments
+
+```python
+def repeat(times):
+    def decorator(func):
         @functools.wraps(func)
-        <span class="kw">def</span> <span class="fn">wrapper</span>(*args, **kwargs):
-            <span class="kw">for</span> _ <span class="kw">in</span> <span class="bi">range</span>(times):
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
                 func(*args, **kwargs)
-        <span class="kw">return</span> wrapper
-    <span class="kw">return</span> decorator
+        return wrapper
+    return decorator
 
-@repeat(<span class="nm">3</span>)
-<span class="kw">def</span> <span class="fn">say_hi</span>():
-    <span class="bi">print</span>(<span class="st">"Hi!"</span>)
+@repeat(3)
+def say_hi():
+    print("Hi!")
 
-say_hi()   <span class="cm"># prints Hi! three times</span></pre>
-    </div>
-  </section>
+say_hi()   # prints Hi! three times
+```
 
-  <!-- 8. GENERATORS -->
-  <section id="generators">
-    <div class="section-num">08 —</div>
-    <h2>Generator <span class="hl">Functions</span></h2>
-    <p>A generator is a special type of function that uses <code>yield</code> instead of <code>return</code>. It produces values one at a time and pauses between each one. This makes them extremely memory-efficient for large datasets.</p>
+### Common Built-in Decorators
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="cm"># Regular function — builds entire list in memory</span>
-<span class="kw">def</span> <span class="fn">get_squares_list</span>(n):
-    <span class="kw">return</span> [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(n)]
+| Decorator | Where | Purpose |
+|-----------|-------|---------|
+| `@staticmethod` | Classes | Method that doesn't need `self` or `cls` |
+| `@classmethod` | Classes | Method that receives the class as first arg |
+| `@property` | Classes | Access a method like an attribute |
+| `@functools.lru_cache` | Anywhere | Cache return values for repeated calls |
+| `@functools.wraps` | Inside decorators | Preserve wrapped function's metadata |
 
-<span class="cm"># Generator — yields one value at a time, uses almost no memory</span>
-<span class="kw">def</span> <span class="fn">get_squares_gen</span>(n):
-    <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(n):
-        <span class="kw">yield</span> x ** <span class="nm">2</span>
+---
 
-gen = get_squares_gen(<span class="nm">1_000_000</span>)
-<span class="bi">print</span>(<span class="bi">next</span>(gen))   <span class="cm"># 0</span>
-<span class="bi">print</span>(<span class="bi">next</span>(gen))   <span class="cm"># 1</span>
+## 8. Generator Functions
 
-<span class="cm"># Use in a for loop just like any iterable</span>
-<span class="kw">for</span> sq <span class="kw">in</span> get_squares_gen(<span class="nm">5</span>):
-    <span class="bi">print</span>(sq)   <span class="cm"># 0 1 4 9 16</span></pre>
-    </div>
+A generator uses `yield` instead of `return`. It produces values **one at a time** and pauses between each one, making it extremely memory-efficient for large datasets.
 
-    <div class="callout tip">
-      <div class="callout-icon">✦</div>
-      <div class="callout-text">Use generators when working with large files, database rows, API pagination, or any scenario where loading everything into memory at once is not practical.</div>
-    </div>
-  </section>
+```python
+# Regular function — builds the entire list in memory at once
+def get_squares_list(n):
+    return [x**2 for x in range(n)]
 
-  <!-- 9. ADVANCED -->
-  <section id="advanced">
-    <div class="section-num">09 —</div>
-    <h2>Advanced <span class="hl">Patterns</span></h2>
+# Generator — yields one value at a time, uses almost no memory
+def get_squares_gen(n):
+    for x in range(n):
+        yield x ** 2
 
-    <h3>Closures</h3>
-    <p>A closure is a function that remembers the variables from its enclosing scope, even after that scope has finished executing.</p>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">make_multiplier</span>(factor):
-    <span class="kw">def</span> <span class="fn">multiply</span>(number):
-        <span class="kw">return</span> number * factor   <span class="cm"># 'factor' is captured</span>
-    <span class="kw">return</span> multiply
+gen = get_squares_gen(1_000_000)
+print(next(gen))   # 0
+print(next(gen))   # 1
 
-double = make_multiplier(<span class="nm">2</span>)
-triple = make_multiplier(<span class="nm">3</span>)
+# Use in a for loop just like any iterable
+for sq in get_squares_gen(5):
+    print(sq)   # 0 1 4 9 16
+```
 
-<span class="bi">print</span>(double(<span class="nm">10</span>))   <span class="cm"># 20</span>
-<span class="bi">print</span>(triple(<span class="nm">10</span>))   <span class="cm"># 30</span></pre>
-    </div>
+### Generator Expression (one-liner)
 
-    <h3>Higher-Order Functions</h3>
-    <p>Functions that take other functions as arguments or return them as results.</p>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">apply_twice</span>(func, value):
-    <span class="kw">return</span> func(func(value))
+```python
+# Similar to list comprehension but lazy
+squares_gen = (x**2 for x in range(10))
+print(sum(squares_gen))   # 285
+```
 
-<span class="kw">def</span> <span class="fn">add_five</span>(x):
-    <span class="kw">return</span> x + <span class="nm">5</span>
+> [!TIP]
+> Use generators when working with large files, database rows, API pagination, or any scenario where loading everything into memory at once is not practical.
 
-<span class="bi">print</span>(apply_twice(add_five, <span class="nm">10</span>))   <span class="cm"># 20</span></pre>
-    </div>
+---
 
-    <h3>Recursive Functions</h3>
-    <p>A function that calls itself. Needs a base case to stop, otherwise you get infinite recursion.</p>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">def</span> <span class="fn">factorial</span>(n):
-    <span class="kw">if</span> n <= <span class="nm">1</span>:          <span class="cm"># base case — stops recursion</span>
-        <span class="kw">return</span> <span class="nm">1</span>
-    <span class="kw">return</span> n * factorial(n - <span class="nm">1</span>)   <span class="cm"># recursive call</span>
+## 9. Advanced Patterns
 
-<span class="bi">print</span>(factorial(<span class="nm">5</span>))   <span class="cm"># 120 → 5 * 4 * 3 * 2 * 1</span></pre>
-    </div>
+### 9.1 Closures
 
-    <h3>functools.lru_cache — Memoization</h3>
-    <p>Cache expensive function results automatically. Huge performance win for repeated calls with the same arguments.</p>
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python</div></div>
-      <pre><span class="kw">from</span> functools <span class="kw">import</span> lru_cache
+A closure is a function that **remembers variables from its enclosing scope**, even after that scope has finished executing.
 
-@lru_cache(<span class="px">maxsize</span>=<span class="kw">None</span>)
-<span class="kw">def</span> <span class="fn">fib</span>(n):
-    <span class="kw">if</span> n < <span class="nm">2</span>:
-        <span class="kw">return</span> n
-    <span class="kw">return</span> fib(n - <span class="nm">1</span>) + fib(n - <span class="nm">2</span>)
+```python
+def make_multiplier(factor):
+    def multiply(number):
+        return number * factor   # 'factor' is captured from outer scope
+    return multiply
 
-<span class="bi">print</span>(fib(<span class="nm">50</span>))   <span class="cm"># instant — no redundant computation</span></pre>
-    </div>
-  </section>
+double = make_multiplier(2)
+triple = make_multiplier(3)
 
-  <!-- 10. BEST PRACTICES -->
-  <section id="best">
-    <div class="section-num">10 —</div>
-    <h2>Best <span class="hl">Practices</span></h2>
+print(double(10))   # 20
+print(triple(10))   # 30
+```
 
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Practice</th>
-          <th>Why it matters</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>One function, one job</td>
-          <td>Easier to test, debug, and reuse. If you can't describe it in one sentence, split it.</td>
-          <td><span class="badge badge-red">Critical</span></td>
-        </tr>
-        <tr>
-          <td>Use descriptive names</td>
-          <td><code>calculate_tax()</code> beats <code>ct()</code> every time. Code is read more than it is written.</td>
-          <td><span class="badge badge-red">Critical</span></td>
-        </tr>
-        <tr>
-          <td>Write docstrings</td>
-          <td>Documents purpose, args, and return value. Tools like <code>help()</code> and IDEs use them.</td>
-          <td><span class="badge badge-green">Recommended</span></td>
-        </tr>
-        <tr>
-          <td>Add type hints</td>
-          <td>Makes intent clear, enables static analysis with <code>mypy</code>, improves IDE autocomplete.</td>
-          <td><span class="badge badge-green">Recommended</span></td>
-        </tr>
-        <tr>
-          <td>Keep functions short</td>
-          <td>Aim for under 20 lines. If it scrolls, it probably does too much.</td>
-          <td><span class="badge badge-green">Recommended</span></td>
-        </tr>
-        <tr>
-          <td>Avoid side effects</td>
-          <td>Pure functions (same input = same output, no state changes) are predictable and testable.</td>
-          <td><span class="badge badge-green">Recommended</span></td>
-        </tr>
-        <tr>
-          <td>Use guard clauses</td>
-          <td>Return early for edge cases to avoid deep nesting. Flat code is easier to read.</td>
-          <td><span class="badge badge-blue">Good habit</span></td>
-        </tr>
-        <tr>
-          <td>Never use mutable defaults</td>
-          <td>Default <code>[]</code> or <code>{}</code> parameters are shared across calls. Use <code>None</code> instead.</td>
-          <td><span class="badge badge-red">Critical</span></td>
-        </tr>
-      </tbody>
-    </table>
+### 9.2 Higher-Order Functions
 
-    <div class="code-wrap">
-      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><div class="code-lang">python — putting it all together</div></div>
-      <pre><span class="kw">from</span> typing <span class="kw">import</span> Optional
+Functions that take other functions as arguments or return them as results.
 
-<span class="kw">def</span> <span class="fn">calculate_discount</span>(
-    price: <span class="bi">float</span>,
-    discount_pct: <span class="bi">float</span>,
-    max_discount: Optional[<span class="bi">float</span>] = <span class="kw">None</span>
-) -> <span class="bi">float</span>:
-    <span class="st">"""
-    Calculate discounted price with optional cap.
+```python
+def apply_twice(func, value):
+    return func(func(value))
+
+def add_five(x):
+    return x + 5
+
+print(apply_twice(add_five, 10))   # 20
+```
+
+### 9.3 Recursive Functions
+
+A function that calls itself. Always needs a **base case** to stop, otherwise you hit infinite recursion.
+
+```python
+def factorial(n):
+    if n <= 1:               # base case — stops recursion
+        return 1
+    return n * factorial(n - 1)   # recursive call
+
+print(factorial(5))   # 120 → 5 * 4 * 3 * 2 * 1
+```
+
+### 9.4 Memoization with `lru_cache`
+
+Cache expensive function results automatically. Huge performance win for repeated calls with the same arguments.
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+print(fib(50))   # instant — no redundant computation
+```
+
+### 9.5 Partial Functions
+
+Fix some arguments of a function and create a new, simpler one.
+
+```python
+from functools import partial
+
+def power(base, exponent):
+    return base ** exponent
+
+square = partial(power, exponent=2)
+cube   = partial(power, exponent=3)
+
+print(square(5))   # 25
+print(cube(3))     # 27
+```
+
+---
+
+## 10. Best Practices
+
+| Practice | Why it Matters |
+|----------|----------------|
+| **One function, one job** | Easier to test, debug, and reuse. If you can't describe it in one sentence, split it. |
+| **Use descriptive names** | `calculate_tax()` beats `ct()` every time. Code is read more than it is written. |
+| **Write docstrings** | Documents purpose, args, and return value. `help()` and IDEs use them. |
+| **Add type hints** | Makes intent clear, enables static analysis with `mypy`, improves autocomplete. |
+| **Keep functions short** | Aim for under 20 lines. If it scrolls, it probably does too much. |
+| **Avoid side effects** | Pure functions (same input = same output, no state changes) are predictable and testable. |
+| **Use guard clauses** | Return early for edge cases to avoid deep nesting. Flat code is easier to follow. |
+| **Never use mutable defaults** | Default `[]` or `{}` are shared across calls. Use `None` instead. |
+
+### Putting It All Together
+
+```python
+from typing import Optional
+
+def calculate_discount(
+    price: float,
+    discount_pct: float,
+    max_discount: Optional[float] = None
+) -> float:
+    """
+    Calculate discounted price with an optional cap.
 
     Args:
-        price:        Original price in USD.
-        discount_pct: Discount percentage (0-100).
-        max_discount: Maximum discount amount allowed.
+        price:         Original price in USD.
+        discount_pct:  Discount percentage (0-100).
+        max_discount:  Maximum discount amount allowed. No cap if None.
 
     Returns:
-        Final price after discount is applied.
-    """</span>
-    <span class="kw">if</span> price < <span class="nm">0</span>:
-        <span class="kw">raise</span> <span class="bi">ValueError</span>(<span class="st">"Price cannot be negative"</span>)
+        Final price after discount is applied, rounded to 2 decimal places.
 
-    discount = price * (discount_pct / <span class="nm">100</span>)
+    Raises:
+        ValueError: If price is negative.
+    """
+    if price < 0:
+        raise ValueError("Price cannot be negative")
 
-    <span class="kw">if</span> max_discount <span class="kw">is not</span> <span class="kw">None</span>:
-        discount = <span class="bi">min</span>(discount, max_discount)
+    discount = price * (discount_pct / 100)
 
-    <span class="kw">return</span> <span class="bi">round</span>(price - discount, <span class="nm">2</span>)</pre>
-    </div>
-  </section>
+    if max_discount is not None:
+        discount = min(discount, max_discount)
+
+    return round(price - discount, 2)
+
+
+# Usage
+print(calculate_discount(100, 20))           # 80.0
+print(calculate_discount(100, 50, max_discount=30))  # 70.0
+```
+
+---
+
+## Quick Reference Cheat Sheet
+
+```python
+# Basic function
+def func(param): ...
+
+# With defaults
+def func(param=default): ...
+
+# Variable args
+def func(*args, **kwargs): ...
+
+# Type hints
+def func(x: int, y: str = "hi") -> bool: ...
+
+# Lambda
+fn = lambda x: x * 2
+
+# Decorator
+@decorator
+def func(): ...
+
+# Generator
+def gen():
+    yield value
+
+# Recursive
+def rec(n):
+    if base_case: return result
+    return rec(n - 1)
+
+# Cached
+from functools import lru_cache
+@lru_cache(maxsize=None)
+def func(n): ...
+```
+
+---
+
+<div align="center">
+
+**Python Functions Reference** — Made with 💚 by Haseeb
+
+*Python 3.10+ · Feel free to fork and star ⭐*
 
 </div>
-
-<footer>
-  Python Functions Reference &mdash; generated for <span>Haseeb</span> &mdash; Python 3.10+
-</footer>
-
-</body>
-</html>
