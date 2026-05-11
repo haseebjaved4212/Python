@@ -24,4 +24,4 @@ for i in range(1, len(l)):
         index = i 
     elif l[i] > second_largest and l[i] != largest:
         second_largest = l[i]
-print(f"Second largest number: {second_largest} at the Index: {index}")
+print(f"Second largest number: {second_largest} at the Index: {l.index(second_largest)}")
