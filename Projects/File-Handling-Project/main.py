@@ -9,14 +9,19 @@ def readFileAndFolder():
 
 
 def createFile():
-          readFileAndFolder()
-          name = input("Enter the name of the file you want to create: ")
-          p = Path(name)
-          with p.open(mode='w') as fs:
-            data = input("Enter the data you want to write in the file: ")
-            fs.write(data)
-print("FILE CREATED SUCCESSFULLY!")
-
+    try:
+        readFileAndFolder()
+        name = input("Enter the name of the file you want to create: ")
+        p = Path(name)
+        if not p.exists():
+            with p.open(mode='w') as fs:
+                data = input("Enter the data you want to write in the file: ")
+                fs.write(data)
+            print("FILE CREATED SUCCESSFULLY!")
+        else:
+            print("File already exists!")
+    except Exception as err:
+        print(f"An error occurred: {err}")
 
 print("Press 1 to create a file")
 print("Press 2 to Read a file")
